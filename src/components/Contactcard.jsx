@@ -16,7 +16,7 @@ const Contactcard=({contact})=>{
             </div>
             <div className="flex gap-3">
               <RiEditCircleFill className="text-4xl" />
-              <MdDelete className="text-4xl" />
+              <MdDelete className="text-4xl"/>
 
             </div>
           </div>
