@@ -6,6 +6,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { CgProfile } from "react-icons/cg";
 import { MdDelete } from "react-icons/md";
 import { RiEditCircleFill } from "react-icons/ri";
+import Contactcard from "./components/Contactcard";
 
 
 const App = () => {
@@ -43,22 +44,9 @@ const App = () => {
       <Search />
 
       <div className="mt-5 ml-4">
-        {contact.map((item) => (
-          <div className="bg-amber-400 w-[450px] justify-around  flex items-center p-1 rounded-xl" key={item.id}>
-            <div className="flex items-center gap-7 ">
-              <CgProfile className="text-4xl  " />
-              <div className="">
-                <p >{item.name}</p>
-                <p>{item.email}</p>
-              </div>
-
-            </div>
-            <div className="flex gap-3">
-              <RiEditCircleFill className="text-4xl" />
-              <MdDelete className="text-4xl" />
-
-            </div>
-          </div>
+        {contact.map((contact) => (
+          <Contactcard key={contact.id} contact={contact}/>
+          
         ))}
       </div>
 
