@@ -2,7 +2,7 @@ import { FaSearch } from "react-icons/fa";
 import { IoAddCircleOutline } from "react-icons/io5";
 
 
-const Search = () => {
+const Search = ({onaddclick}) => {
     return (
         <div className="flex justify-center mt-10 gap-3">
             <div className="flex   relative items-center ">
@@ -11,9 +11,9 @@ const Search = () => {
 
                 
             </div>
-            <div>
+            <button onClick={onaddclick}> {/* on clicking on this button this calls onaddclick function in app.jsx shose work was to setmodal=true..which means it will open the model*/}
                 <IoAddCircleOutline  className=" text-5xl text-white" />
-            </div>
+            </button>
         </div>
 
     )

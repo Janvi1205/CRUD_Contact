@@ -3,9 +3,7 @@ import Navbar from "./components/Navbar";
 import Search from "./components/Search";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
-import { CgProfile } from "react-icons/cg";
-import { MdDelete } from "react-icons/md";
-import { RiEditCircleFill } from "react-icons/ri";
+import Modal from "./components/Modal"
 import Contactcard from "./components/Contactcard";
 
 
@@ -35,13 +33,15 @@ const App = () => {
 
   }, [])// [] means--->“When my page opens, run this code one time”
 
+  const [isModalOpen, setIsModalOpen] = useState(false);  //created a usestate to handle modal
 
 
   return (
     <div className="mx-auto max-w-[830px]">
 
       <Navbar />
-      <Search />
+      <Search onaddclick={()=>setIsModalOpen(true)} /> {/* made a function which setmodal to true adn send it to search */}
+        
 
       <div className="mt-5 ml-4">
         {contact.map((contact) => (
@@ -49,6 +49,8 @@ const App = () => {
           
         ))}
       </div>
+      <Modal isOpen={isModalOpen} onClose={()=>setIsModalOpen(false)}/> {/* made a function which setmodal to false adn send it to modal */}
+      
 
     </div>
 
