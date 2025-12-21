@@ -3,6 +3,9 @@ import Navbar from "./components/Navbar";
 import Search from "./components/Search";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { CgProfile } from "react-icons/cg";
+import { MdDelete } from "react-icons/md";
+import { RiEditCircleFill } from "react-icons/ri";
 
 
 const App = () => {
@@ -22,7 +25,7 @@ const App = () => {
 
       }));
       console.log("Contacts from Firestore:", contactlist);
-      
+
       setcontact(contactlist);
 
     }
@@ -39,11 +42,22 @@ const App = () => {
       <Navbar />
       <Search />
 
-      <div>
+      <div className="mt-5 ml-4">
         {contact.map((item) => (
-          <div  key={item.id}>
-            <p className="bg-amber-400">{item.name}</p>
-            <p>{item.email}</p>
+          <div className="bg-amber-400 w-[450px] justify-around  flex items-center p-1 rounded-xl" key={item.id}>
+            <div className="flex items-center gap-7 ">
+              <CgProfile className="text-4xl  " />
+              <div className="">
+                <p >{item.name}</p>
+                <p>{item.email}</p>
+              </div>
+
+            </div>
+            <div className="flex gap-3">
+              <RiEditCircleFill className="text-4xl" />
+              <MdDelete className="text-4xl" />
+
+            </div>
           </div>
         ))}
       </div>
