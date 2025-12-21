@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import Search from "./components/Search";
-import { db } from "./firebase";
+import { db } from "../firebase";
+import { collection, getDocs } from "firebase/firestore";
 
-import { collection, getDocs, doc } from 'firebase/firestore'
 
 const App = () => {
 
@@ -21,6 +21,8 @@ const App = () => {
 
 
       }));
+      console.log("Contacts from Firestore:", contactlist);
+      
       setcontact(contactlist);
 
     }
@@ -37,12 +39,14 @@ const App = () => {
       <Navbar />
       <Search />
 
-      {contact.map((item) => (
-        <div key={item.id}>
-          <p>{item.name}</p>
-          <p>{item.email}</p>
-        </div>
-      ))}
+      <div>
+        {contact.map((item) => (
+          <div  key={item.id}>
+            <p className="bg-amber-400">{item.name}</p>
+            <p>{item.email}</p>
+          </div>
+        ))}
+      </div>
 
     </div>
 
