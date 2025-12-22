@@ -49,7 +49,7 @@ const App = () => {
           
         ))}
       </div>
-      <div className="flex justify-center items-center ">
+      <div>
         <Modal isOpen={isModalOpen} onClose={()=>setIsModalOpen(false)}/>{/* made a function which setmodal to false adn send it to modal */}
 
         

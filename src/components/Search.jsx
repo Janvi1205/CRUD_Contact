@@ -12,7 +12,7 @@ const Search = ({onaddclick}) => {
                 
             </div>
             <button onClick={onaddclick}> {/* on clicking on this button this calls onaddclick function in app.jsx shose work was to setmodal=true..which means it will open the model*/}
-                <IoAddCircleOutline  className=" text-5xl text-white" />
+                <IoAddCircleOutline  className=" cursor-pointer text-5xl text-white" />
             </button>
         </div>
 
