@@ -4,6 +4,7 @@ import { MdClose } from "react-icons/md";
 import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { useEffect } from "react"; 
+import { toast } from "react-toastify";
 
 
 
@@ -33,10 +34,12 @@ const Modal = ({ isOpen, onClose, onaddcontact, editingContact }) => {
             await updateDoc(doc(db, "contacts", editingContact.id),
                 { name, email }
             );
+            toast.success("Contact updated successfully...!")
         } 
         else {
             // ADD
             await addDoc(collection(db, "contacts"), { name, email });
+             toast.success("Contact added successfully 🎉");
         }
 
         setName("");

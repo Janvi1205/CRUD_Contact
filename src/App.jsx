@@ -5,6 +5,10 @@ import { db } from "../firebase";
 import { collection, deleteDoc, getDocs, doc } from "firebase/firestore";
 import Modal from "./components/Modal"
 import Contactcard from "./components/Contactcard";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import{toast} from "react-toastify"
+
 
 
 const App = () => {
@@ -43,6 +47,7 @@ const App = () => {
     await deleteDoc(doc(db, "contacts", id)) //for deleting firebase used deleteDoc
 
     setcontact((prev) => prev.filter((c) => c.id != id));  // remove from UI instantly (no refetch needed)
+     toast.success("Contact Deleted successfully 🎉");
 
 
 
@@ -78,7 +83,7 @@ const App = () => {
 
 
       </div>
-
+       <ToastContainer position="top-right" autoClose={2000} />
 
     </div>
 
