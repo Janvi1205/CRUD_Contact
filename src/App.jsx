@@ -13,6 +13,9 @@ const App = () => {
 
   const [editing, setediting] = useState(null);
 
+  const [searchTerm, setSearchTerm] = useState("");
+
+
 
   const getcontact = async () => {       //db is the firestore database and contact is the name of the collection 
     const contactref = collection(db, "contacts");  // means Point to the contacts collection in Firestore
@@ -54,16 +57,18 @@ const App = () => {
     setIsModalOpen(true);
   };
 
+  const filtercontact = contact.filter((c) => c.name.toLowerCase()
+                                              .includes(searchTerm.toLowerCase()));
 
   return (
     <div className="mx-auto max-w-[830px]">
 
       <Navbar />
-      <Search onaddclick={() => setIsModalOpen(true)} /> {/* made a function which setmodal to true adn send it to search */}
+      <Search onaddclick={() => setIsModalOpen(true)} onsearch={setSearchTerm} /> {/* made a function which setmodal to true adn send it to search */}
 
 
       <div className="mt-5 ml-4">
-        {contact.map((contact) => (
+        {filtercontact.map((contact) => (
           <Contactcard onedit={handleEdit} contact={contact} ondelete={handledelete} /> //passed the handle delete function
 
         ))}
