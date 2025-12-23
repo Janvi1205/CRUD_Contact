@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import Search from "./components/Search";
 import { db } from "../firebase";
-import { collection, deleteDoc, getDocs,doc} from "firebase/firestore";
+import { collection, deleteDoc, getDocs, doc } from "firebase/firestore";
 import Modal from "./components/Modal"
 import Contactcard from "./components/Contactcard";
 
@@ -11,6 +11,7 @@ const App = () => {
 
   const [contact, setcontact] = useState([]);
 
+  const [editing, setediting] = useState(null);
 
 
   const getcontact = async () => {                    //db is the firestore database and contact is the name of the collection 
@@ -32,13 +33,13 @@ const App = () => {
     getcontact();
   }, []);    // [] means--->“When my page opens, run this code one time”
 
-  
 
-  const handledelete=async(id)=>{      //recieves the id of the deletd item from contactcard and do the operation of deleting  
 
-    await deleteDoc(doc(db,"contacts",id)) //for deleting firebase used deleteDoc
+  const handledelete = async (id) => {      //recieves the id of the deletd item from contactcard and do the operation of deleting  
 
-    setcontact((prev)=>prev.filter((c)=>c.id!=id));  // remove from UI instantly (no refetch needed)
+    await deleteDoc(doc(db, "contacts", id)) //for deleting firebase used deleteDoc
+
+    setcontact((prev) => prev.filter((c) => c.id != id));  // remove from UI instantly (no refetch needed)
 
 
 
@@ -47,6 +48,11 @@ const App = () => {
 
 
   const [isModalOpen, setIsModalOpen] = useState(false);  //created a usestate to handle modal
+
+  const handleEdit = (contact) => {
+    setediting(contact);
+    setIsModalOpen(true);
+  };
 
 
   return (
@@ -58,12 +64,12 @@ const App = () => {
 
       <div className="mt-5 ml-4">
         {contact.map((contact) => (
-          <Contactcard  contact={contact} ondelete={handledelete} /> //passed the handle delete function
+          <Contactcard onedit={handleEdit} contact={contact} ondelete={handledelete} /> //passed the handle delete function
 
         ))}
       </div>
       <div>
-        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onaddcontact={getcontact} />{/* made a function which setmodal to false adn send it to modal */}
+        <Modal isOpen={isModalOpen} onClose={() => { setIsModalOpen(false); setediting(null) }} onaddcontact={getcontact} editingContact={editing} />{/* made a function which setmodal to false adn send it to modal */}
 
 
       </div>
