@@ -14,7 +14,7 @@ const App = () => {
   const [editing, setediting] = useState(null);
 
 
-  const getcontact = async () => {                    //db is the firestore database and contact is the name of the collection 
+  const getcontact = async () => {       //db is the firestore database and contact is the name of the collection 
     const contactref = collection(db, "contacts");  // means Point to the contacts collection in Firestore
 
     const Snapshot = await getDocs(contactref);  //Fetches ALL documents inside contacts and Wait until Firebase finishes fetching data  //snapshpt is A container holding all fetched documents
