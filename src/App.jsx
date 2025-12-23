@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import Search from "./components/Search";
 import { db } from "../firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, deleteDoc, getDocs,doc} from "firebase/firestore";
 import Modal from "./components/Modal"
 import Contactcard from "./components/Contactcard";
 
@@ -32,7 +32,17 @@ const App = () => {
     getcontact();
   }, []);    // [] means--->“When my page opens, run this code one time”
 
+  
 
+  const handledelete=async(id)=>{      //recieves the id of the deletd item from contactcard and do the operation of deleting  
+
+    await deleteDoc(doc(db,"contacts",id)) //for deleting firebase used deleteDoc
+
+    setcontact((prev)=>prev.filter((c)=>c.id!=id));  // remove from UI instantly (no refetch needed)
+
+
+
+  }
 
 
 
@@ -48,7 +58,7 @@ const App = () => {
 
       <div className="mt-5 ml-4">
         {contact.map((contact) => (
-          <Contactcard key={contact.id} contact={contact} />
+          <Contactcard  contact={contact} ondelete={handledelete} /> //passed the handle delete function
 
         ))}
       </div>

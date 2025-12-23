@@ -3,7 +3,7 @@ import { MdDelete } from "react-icons/md";
 import { RiEditCircleFill } from "react-icons/ri";
 
 
-const Contactcard=({contact})=>{
+const Contactcard=({contact,ondelete})=>{
 
 
     return(
@@ -18,9 +18,8 @@ const Contactcard=({contact})=>{
             </div>
             <div className="flex gap-3 ">
               <RiEditCircleFill className="text-4xl" />
-              <MdDelete className="text-4xl"/>
-
-            </div>
+              <button  onClick={() => ondelete(contact.id)} ><MdDelete className="text-4xl cursor-pointer"/></button>
+            </div>  {/*on clicking it calls the ondelete method and also pass the id of the deleted item */}
           </div>
           
 
