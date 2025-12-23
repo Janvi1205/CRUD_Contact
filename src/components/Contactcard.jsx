@@ -17,7 +17,7 @@ const Contactcard=({contact,ondelete,onedit})=>{
 
             </div>
             <div className="flex gap-3 ">
-              <RiEditCircleFill onClick={() => onedit(contact)}  className="text-4xl" />
+              <RiEditCircleFill onClick={() => onedit(contact)}  className="text-4xl cursor-pointer" />
               <button  onClick={() => ondelete(contact.id)} ><MdDelete className="text-4xl cursor-pointer"/></button>
             </div>  {/*on clicking it calls the ondelete method and also pass the id of the deleted item */}
           </div>
