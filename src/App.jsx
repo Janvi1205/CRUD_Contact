@@ -5,7 +5,7 @@ import { db } from "../firebase";
 import { collection, deleteDoc, getDocs, doc } from "firebase/firestore";
 import Modal from "./components/Modal"
 import Contactcard from "./components/Contactcard";
-import { ToastContainer } from "react-toastify";
+import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import{toast} from "react-toastify"
 
@@ -13,19 +13,19 @@ import{toast} from "react-toastify"
 
 const App = () => {
 
-  const [contact, setcontact] = useState([]);
+  const [contact,setcontact]=useState([]);
 
-  const [editing, setediting] = useState(null);
+  const [editing,setediting]=useState(null);
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm,setSearchTerm]=useState("");
 
 
 
-  const getcontact = async () => {       //db is the firestore database and contact is the name of the collection 
-    const contactref = collection(db, "contacts");  // means Point to the contacts collection in Firestore
+  const getcontact=async ()=>{//db is the firestore database and contact is the name of the collection 
+    const contactref = collection(db, "contacts");// means Point to the contacts collection in Firestore
 
-    const Snapshot = await getDocs(contactref);  //Fetches ALL documents inside contacts and Wait until Firebase finishes fetching data  //snapshpt is A container holding all fetched documents
-    const contactlist = Snapshot.docs.map((doc) => ({    //Snapshot.docs = array of documents
+    const Snapshot=await getDocs(contactref);//Fetches ALL documents inside contacts and Wait until Firebase finishes fetching data  //snapshpt is A container holding all fetched documents
+    const contactlist=Snapshot.docs.map((doc)=>({//Snapshot.docs = array of documents
       id: doc.id,
       ...doc.data()
 
@@ -42,12 +42,12 @@ const App = () => {
 
 
 
-  const handledelete = async (id) => {      //recieves the id of the deletd item from contactcard and do the operation of deleting  
+  const handledelete = async (id) => {//recieves the id of the deletd item from contactcard and do the operation of deleting  
 
     await deleteDoc(doc(db, "contacts", id)) //for deleting firebase used deleteDoc
 
-    setcontact((prev) => prev.filter((c) => c.id != id));  // remove from UI instantly (no refetch needed)
-     toast.success("Contact Deleted successfully 🎉");
+    setcontact((prev) => prev.filter((c) => c.id != id));// remove from UI instantly (no refetch needed)
+     toast.success("Contact Deleted successfully🎉");
 
 
 
@@ -55,7 +55,7 @@ const App = () => {
 
 
 
-  const [isModalOpen, setIsModalOpen] = useState(false);  //created a usestate to handle modal
+  const [isModalOpen, setIsModalOpen] = useState(false);//created a usestate to handle modal
 
   const handleEdit = (contact) => {
     setediting(contact);
@@ -69,12 +69,12 @@ const App = () => {
     <div className="mx-auto max-w-[830px]">
 
       <Navbar />
-      <Search onaddclick={() => setIsModalOpen(true)} onsearch={setSearchTerm} /> {/* made a function which setmodal to true adn send it to search */}
+      <Search onaddclick={()=> setIsModalOpen(true)} onsearch={setSearchTerm}/> {/*made a function which setmodal to true adn send it to search */}
 
 
       <div className="mt-5 ml-4">
         {filtercontact.map((contact) => (
-          <Contactcard onedit={handleEdit} contact={contact} ondelete={handledelete} /> //passed the handle delete function
+          <Contactcard onedit={handleEdit} contact={contact} ondelete={handledelete} />//passed the handle delete function
 
         ))}
       </div>
